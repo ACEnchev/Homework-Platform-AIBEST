@@ -1,65 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homework Platform</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-</head>
-<body class="bg-gray-100">
+@page
+@model HomeworkPlatform.Pages.IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
 
-    <!-- Navbar -->
-    <nav class="bg-blue-600 p-4 text-white">
-        <div class="container mx-auto flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold">Homework Platform</a>
-            <div>
-                <a href="#" class="mr-4">Home</a>
-                <a href="#" class="mr-4">Assignments</a>
-                <a href="#">Profile</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Main Content -->
-    <div class="container mx-auto mt-10">
-        <div class="bg-white p-6 rounded-lg shadow-lg">
-            <h1 class="text-3xl font-bold mb-4">Welcome to Homework Platform</h1>
-            <p class="mb-6">Here you can view and manage your assignments.</p>
-            
-            <!-- Assignments List -->
-            <div class="mb-6">
-                <h2 class="text-2xl font-bold mb-4">Your Assignments</h2>
-                <ul>
-                    <li class="bg-gray-100 p-4 mb-4 rounded-lg shadow">
-                        <h3 class="text-xl font-bold">Assignment 1</h3>
-                        <p>Due Date: 2024-08-01</p>
-                        <a href="#" class="text-blue-600">View Details</a>
-                    </li>
-                    <li class="bg-gray-100 p-4 mb-4 rounded-lg shadow">
-                        <h3 class="text-xl font-bold">Assignment 2</h3>
-                        <p>Due Date: 2024-08-15</p>
-                        <a href="#" class="text-blue-600">View Details</a>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Add New Assignment Form -->
-            <div>
-                <h2 class="text-2xl font-bold mb-4">Add New Assignment</h2>
-                <form id="assignmentForm">
-                    <div class="mb-4">
-                        <label class="block text-gray-700">Title</label>
-                        <input type="text" id="title" class="w-full p-2 border border-gray-300 rounded-lg" required>
-                    </div>
-                    <div class="mb-4">
-                        <label class="block text-gray-700">Due Date</label>
-                        <input type="date" id="dueDate" class="w-full p-2 border border-gray-300 rounded-lg" required>
-                    </div>
-                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg">Add Assignment</button>
-                </form>
-            </div>
+<!-- Navbar -->
+<nav class="bg-blue-600 p-4 text-white">
+    <div class="container mx-auto flex justify-between items-center">
+        <a href="/" class="text-2xl font-bold">Homework Platform</a>
+        <div>
+            <a href="/" class="mr-4">Home</a>
+            <a href="/Assignments" class="mr-4">Assignments</a>
+            <a href="/Profile">Profile</a>
         </div>
     </div>
+</nav>
 
-</body>
-</html>
+<!-- Main Content -->
+<div class="container mx-auto mt-10">
+    <div class="bg-white p-6 rounded-lg shadow-lg">
+        <h1 class="text-3xl font-bold mb-4">Welcome to Homework Platform</h1>
+        <p class="mb-6">Here you can view and manage your assignments.</p>
+
+        <!-- Assignments List -->
+        <div class="mb-6">
+            <h2 class="text-2xl font-bold mb-4">Your Assignments</h2>
+            <ul>
+                @foreach (var assignment in Model.Assignments)
+                {
+                    <li class="bg-gray-100 p-4 mb-4 rounded-lg shadow">
+                        <h3 class="text-xl font-bold">@assignment.Title</h3>
+                        <p>Due Date: @assignment.DueDate.ToShortDateString()</p>
+                        <a href="/Assignments/Details/@assignment.Id" class="text-blue-600">View Details</a>
+                    </li>
+                }
+            </ul>
+        </div>
+
+        <!-- Add New Assignment Form -->
+        <div>
+            <h2 class="text-2xl font-bold mb-4">Add New Assignment</h2>
+            <form method="post">
+                <div class="mb-4">
+                    <label class="block text-gray-700">Title</label>
+                    <input type="text" name="Title" class="w-full p-2 border border-gray-300 rounded-lg" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Due Date</label>
+                    <input type="date" name="DueDate" class="w-full p-2 border border-gray-300 rounded-lg" required>
+                </div>
+                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg">Add Assignment</button>
+            </form>
+        </div>
+    </div>
+</div>
