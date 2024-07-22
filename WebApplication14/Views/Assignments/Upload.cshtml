@@ -1,0 +1,42 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model WebApplication14.Models.Assignments
+<div class="row">
+    <div class="col-md-5">
+        <form method="post" enctype="multipart/form-data" asp-controller="Assignments" asp-action="Upload">
+            <div class="form-group">
+                <div class="col-md-10">
+                    <p>Upload File</p>
+                    <input class="form-control" name="file" type="file"/>
+                </div>               
+            </div>    
+            
+            <div class="form-group">
+                <label asp-for="ClassesId" class="control-label"></label>
+                <input asp-for="ClassesId" class="form-control"/>
+                
+            </div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+           
+            <div class="form-group">
+                <label asp-for="DueData" class="control-label"></label>
+                <input asp-for="DueData" class="form-control" />
+                <span asp-validation-for="DueData" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input class="btn btn-success" type="submit" value="Upload" />
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+</div>

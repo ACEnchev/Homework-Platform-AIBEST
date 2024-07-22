@@ -1,0 +1,13 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<WebApplication14.Models.User>
+@foreach(var item in Model)
+{
+    if(item.Role == "Student")
+    {
+        <h1>@item.Email</h1>
+    }
+}

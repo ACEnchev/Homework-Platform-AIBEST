@@ -1,0 +1,35 @@
+﻿@model WebApplication14.Models.User;
+@{
+    ViewData["Title"] = "Login";
+    Layout = null;
+}
+
+<
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Homework Platform</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+
+    <div class="bg-white p-8 rounded-lg shadow-lg w-96">
+        <h2 class="text-2xl font-bold mb-6 text-center">Login</h2>
+        <form asp-action="Login">
+            <div class="mb-4">
+                <label asp-for="Email" class="block text-gray-700">Email</label>
+                <input asp-for="Email" type="email" id="email" class="w-full p-2 border border-gray-300 rounded-lg" required>
+            </div>
+            <div class="mb-6">
+                <label asp-for ="Password" class="block text-gray-700">Password</label>
+                <input asp-for ="Password" type="password" id="password" class="w-full p-2 border border-gray-300 rounded-lg" required>
+            </div>
+            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg w-full">Login</button>
+        </form>
+        <p class="mt-4 text-center">Don't have an account? <a href="/Account/Register" class="text-blue-600">Register</a></p>
+    </div>   
+
+</body>
+</html>
