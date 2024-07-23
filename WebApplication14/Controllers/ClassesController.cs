@@ -152,5 +152,16 @@ namespace WebApplication14.Controllers
             }
             
         }
+        [HttpGet]
+        [Route("classes/{id}/getusers")]
+        public async Task<IActionResult> GetStudentsFromClass([FromRoute] int id)
+        {
+            var UsersInClass = await _context.student
+                .Include(x => x.user)
+                .AsNoTracking()
+                .Where(x => x.user.ClassesId == id)
+                .ToListAsync();
+            return View(UsersInClass);
+        }
     }
 }
