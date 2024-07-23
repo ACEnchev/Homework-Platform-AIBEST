@@ -1,0 +1,19 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model IEnumerable<WebApplication14.Models.Assignments>
+<h1>Homeworks for class with id @Model.First().ClassesId (@Model.First().classes.ClassName)</h1>
+@foreach(var item in Model)
+{
+    
+    <h1>@item.Title</h1>
+    <h1>@item.CreatedBy</h1>
+    <a asp-action="Download" asp-controller="Assignments" asp-route-id="@item.AssignmentsId">Download</a>
+    <a asp-action="Submit" asp-controller="Submission" asp-route-id="@item.AssignmentsId">Submit</a>
+    
+}
+
+

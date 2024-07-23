@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    
+    <h1>Welcome, @ViewBag.Email!</h1>
+    
+    <h1>Your Id is @ViewBag.UserId</h1>
+    
+    @if(ViewBag.Role == "Teacher")
+    {
+        <a href="/users/getall">
+            <input type="button" value="See all students" />    
+        </a>
+    }
+    <a asp-action="GetInfo" asp-controller="User" asp-route-id="@ViewBag.UserId">
+        <input type ="button" value="Info"/>
+    </a>
+    <a href ="/classes">
+        <input type ="button" value="See classes"/>    
+    </a>
+    <a href ="/assignments/view">
+    <input type = "button" value="See Homework"/>    
+    </a>
+    <a asp-action="SeeSubmissions" asp-controller="Submission" asp-route-id="@ViewBag.UserId">Download</a>
+</div>

@@ -1,0 +1,90 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework Platform</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+
+    <!-- Navbar -->
+    <nav class="bg-blue-600 p-4 text-white">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold">Homework Platform</a>
+            <div>
+                <a href="#" class="mr-4">Home</a>
+                <a href="/assignments/view" class="mr-4">Assignments</a>
+                <a class ="mr-4" asp-action="GetInfo" asp-controller ="User" asp-route-id="@ViewBag.UserId">Profile</a>
+                <a class = "mr-4" asp-action="Logout" asp-controller="Account">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto mt-10">
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+            <h1 class="text-3xl font-bold mb-4">Welcome to Homework Platform</h1>
+            <p class="mb-6">Here you can view and manage your assignments.</p>
+
+            <a asp-action="SeeSubmissions" asp-controller="Submission" asp-route-id="@ViewBag.UserId">
+                <input type="button" value="See yours Submissions" />
+            </a>
+            @if(@ViewBag.Role == "Student")
+            {
+                <div>
+                    <h2 class="text-2xl font-bold mb-4">Check your Grades</h2>
+                    <a asp-action="CheckGrade" asp-controller="Grades" asp-route-id="@ViewBag.StudentId">
+                        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg">Check Grades</button>
+                    </a>
+
+                </div>
+            }
+            <div>
+
+                @if (ViewBag.Role == "Teacher")
+                {
+
+                    <a href="/submission/view">
+                        <input type="button" value="Submissions" />
+                    </a>
+                }
+
+            </div>
+            
+            <!-- Add New Assignment Form -->
+            @if(ViewBag.Role == "Teacher")
+            {
+                <div>
+                    <h2 class="text-2xl font-bold mb-4">Add New Assignment</h2>
+                    <a href="/assignments/upload">
+                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg">Add Assignment</button>
+                    </a>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold mb-4"> Grade Submissions</h2>
+                    <a href ="/submission/view">
+                        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg">Grade Submissions</button>
+                    </a>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold mb-4">Information about your class</h2>
+                    <h1 class="text-2xl font-bold mb-4">Your class Id - @ViewBag.ClassId</h1>
+                    <h1 class="text-2xl font-bold mb-4">Class Name - @ViewBag.ClassName</h1>
+                    <a asp-action="GetStudentsFromClass" asp-controller="Classes" asp-route-id="@ViewBag.ClassId">
+                        <button type = "submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg">See the students in your class</button>
+                    </a>
+                </div>
+                
+            }
+           
+        </div>
+    </div>
+
+</body>
+</html>
