@@ -1,1 +1,19 @@
+INSERT INTO `finalattemtp`.`classes` (`ClassesId`, `ClassName`, `StudentCount`) VALUES ('1', 'Nothing', '11');
+INSERT INTO `finalattemtp`.`classes` (`ClassesId`, `ClassName`, `StudentCount`) VALUES ('2', '12th Grade', '26');
+INSERT INTO `finalattemtp`.`classes` (`ClassesId`, `ClassName`, `StudentCount`) VALUES ('3', '11th Grade', '25');
+INSERT INTO `finalattemtp`.`classes` (`ClassesId`, `ClassName`, `StudentCount`) VALUES ('4', '10th Grade', '25');
+INSERT INTO `finalattemtp`.`classes` (`ClassesId`, `ClassName`, `StudentCount`) VALUES ('5', '9th Grade', '26');
+INSERT INTO `finalattemtp`.`classes` (`ClassesId`, `ClassName`, `StudentCount`) VALUES ('6', '8th Grade', '24');
 
+INSERT INTO `finalattemtp`.`users` (`UserId`, `Email`, `Password`, `Username`, `FirstName`, `LastName`, `Role`, `ClassesId`) VALUES ('1', 'admin@abv.bg', '123123', 'Adminin', 'Ivan', 'Petrov', 'Admin', '1');
+INSERT INTO `finalattemtp`.`users` (`UserId`, `Email`, `Password`, `Username`, `FirstName`, `LastName`, `Role`, `ClassesId`) VALUES ('2', 'teacher@abv.bg', '1111', 'Teache', 'Peter', 'Stoqnov', 'Teacher', '2');
+INSERT INTO `finalattemtp`.`users` (`UserId`, `Email`, `Password`, `Username`, `FirstName`, `LastName`, `Role`, `ClassesId`) VALUES ('3', 'teacher1@abv.bg', '111', 'Teachi', 'Georgi', 'Hristov', 'Teacher', '2');
+INSERT INTO `finalattemtp`.`users` (`UserId`, `Email`, `Password`, `Username`, `FirstName`, `LastName`, `Role`, `ClassesId`) VALUES ('4', 'teacher2@abv.bg', '1111', 'Te', 'Stoqn', 'Georgiev', 'Teacher', '3');
+INSERT INTO `finalattemtp`.`users` (`UserId`, `Email`, `Password`, `Username`, `FirstName`, `LastName`, `Role`, `ClassesId`) VALUES ('5', 'teacher3@abv.bg', '11', 'He', 'Ime', 'Imev2', 'Teacher', '3');
+
+INSERT INTO `finalattemtp`.`administrators` (`UserId`) VALUES ('1');
+
+INSERT INTO `finalattemtp`.`teachers` (`UserId`) VALUES ('2');
+INSERT INTO `finalattemtp`.`teachers` (`UserId`) VALUES ('3');
+INSERT INTO `finalattemtp`.`teachers` (`UserId`) VALUES ('4');
+INSERT INTO `finalattemtp`.`teachers` (`UserId`) VALUES ('5');
