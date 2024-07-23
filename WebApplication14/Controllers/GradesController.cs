@@ -59,5 +59,43 @@ namespace WebApplication14.Controllers
             return RedirectToAction("Index", "Home");
 
         }
+        [HttpGet]
+        [Route("grades/student/{id}")]
+        public async Task<IActionResult> CheckGrade([FromRoute] int id)
+        {
+            var role = HttpContext.Session.GetString("Role");
+            var email = HttpContext.Session.GetString("Email");
+            var password = HttpContext.Session.GetString("Password");
+            var user = _context.users.FirstOrDefault(x => x.Email == email && x.Password == password);
+
+            
+
+            if(role == "Teacher" && user != null)
+            {
+                var StudentGrades = await _context.grades
+               .Include(x => x.submission)
+               .AsNoTracking()
+               .Where(x => x.submission.StudentId == id)
+               .ToListAsync();
+                return View(StudentGrades);
+            }
+            else if(role == "Student" && user != null)
+            {
+                var student = _context.student.FirstOrDefault(x => x.UserId == user.UserId);
+
+                var stuId = student.StudentId;
+                if(id != stuId)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                var StudentGrades = await _context.grades
+               .Include(x => x.submission)
+               .AsNoTracking()
+               .Where(x => x.submission.StudentId == id)
+               .ToListAsync();
+                return View(StudentGrades);
+            }
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
