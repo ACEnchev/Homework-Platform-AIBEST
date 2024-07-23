@@ -5,15 +5,46 @@
 }
 
 @model IEnumerable<WebApplication14.Models.Assignments>
-<h1>Homeworks for class with id @Model.First().ClassesId (@Model.First().classes.ClassName)</h1>
-@foreach(var item in Model)
-{
-    
-    <h1>@item.Title</h1>
-    <h1>@item.CreatedBy</h1>
-    <a asp-action="Download" asp-controller="Assignments" asp-route-id="@item.AssignmentsId">Download</a>
-    <a asp-action="Submit" asp-controller="Submission" asp-route-id="@item.AssignmentsId">Submit</a>
-    
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework Platform</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<div class="container mx-auto p-4">
+    <h1 class="text-2xl font-bold mb-6">Homeworks for class with ID @Model.First().ClassesId (@Model.First().classes.ClassName)</h1>
+
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white border border-gray-300 rounded-lg">
+            <thead>
+                <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                    <th class="py-3 px-6 text-left">Title</th>
+                    <th class="py-3 px-6 text-left">Created By</th>
+                    <th class="py-3 px-6 text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="text-gray-600 text-sm font-light">
+                @foreach (var item in Model)
+                {
+                    <tr class="border-b border-gray-200 hover:bg-gray-100">
+                        <td class="py-3 px-6 text-left whitespace-nowrap">
+                            <span class="font-medium">@item.Title</span>
+                        </td>
+                        <td class="py-3 px-6 text-left">
+                            <span>@item.CreatedBy</span>
+                        </td>
+                        <td class="py-3 px-6 text-center">
+                            <a asp-action="Download" asp-controller="Assignments" asp-route-id="@item.AssignmentsId" class="text-blue-600 hover:underline">Download</a>
+                            <span class="mx-2">|</span>
+                            <a asp-action="Submit" asp-controller="Submission" asp-route-id="@item.AssignmentsId" class="text-blue-600 hover:underline">Submit</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
 
 
