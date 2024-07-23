@@ -4,52 +4,55 @@
 @{
 }
 @model IEnumerable<WebApplication14.Models.Submission>
-<h1>Here you can see all the submissions of your class </h1>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.SubmissionId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StudentId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SubmissionDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Feedback)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AssignmentsId)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    <h1>@item.SubmissionId</h1>
-                </td>
-                <td>
-                    <h1>@item.StudentId</h1>
-                </td>
-                <td>
-                    <h1>@item.SubmissionDate</h1>
-                </td>
-                <td>
-                    <h1>@item.Feedback</h1>
-                </td>
-                <td>
-                    <h1>@item.AssignmentsId</h1>
-                </td>
-                <td>
-                    <a asp-action="Download" asp-controller="Submission" asp-route-id="@item.SubmissionId">Download</a>
-                    <a asp-action="AddGrade" asp-controller="Grades" asp-route-id="@item.SubmissionId">Grade</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-<h1>@Model.First().SubmissionDate</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework Platform</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<div class="container mx-auto p-4">
+    <h1 class="text-2xl font-bold mb-6">Here you can see all the submissions of your class</h1>
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white border border-gray-300 rounded-lg">
+            <thead>
+                <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                    <th class="py-3 px-6 text-left">@Html.DisplayNameFor(model => model.SubmissionId)</th>
+                    <th class="py-3 px-6 text-left">@Html.DisplayNameFor(model => model.StudentId)</th>
+                    <th class="py-3 px-6 text-left">@Html.DisplayNameFor(model => model.SubmissionDate)</th>
+                    <th class="py-3 px-6 text-left">@Html.DisplayNameFor(model => model.Feedback)</th>
+                    <th class="py-3 px-6 text-left">@Html.DisplayNameFor(model => model.AssignmentsId)</th>
+                    <th class="py-3 px-6 text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="text-gray-600 text-sm font-light">
+                @foreach (var item in Model)
+                {
+                    <tr class="border-b border-gray-200 hover:bg-gray-100">
+                        <td class="py-3 px-6 text-left whitespace-nowrap">
+                            <span class="font-medium">@item.SubmissionId</span>
+                        </td>
+                        <td class="py-3 px-6 text-left">
+                            <span>@item.StudentId</span>
+                        </td>
+                        <td class="py-3 px-6 text-left">
+                            <span>@item.SubmissionDate</span>
+                        </td>
+                        <td class="py-3 px-6 text-left">
+                            <span>@item.Feedback</span>
+                        </td>
+                        <td class="py-3 px-6 text-left">
+                            <span>@item.AssignmentsId</span>
+                        </td>
+                        <td class="py-3 px-6 text-center">
+                            <a asp-action="Download" asp-controller="Submission" asp-route-id="@item.SubmissionId" class="text-blue-600 hover:underline">Download</a>
+                            <span class="mx-2">|</span>
+                            <a asp-action="AddGrade" asp-controller="Grades" asp-route-id="@item.SubmissionId" class="text-blue-600 hover:underline">Grade</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
