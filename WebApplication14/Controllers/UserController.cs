@@ -53,12 +53,16 @@ namespace WebApplication14.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
-        public  User GetCurrentUser()
+        [HttpGet]
+        [Route("users/getusers/{id}")]
+        public IActionResult GetUsersFromClass([FromRoute] int id)
         {
-           
-            var uid = HttpContext.Session.GetInt32("UserId");
-            var user = _context.users.FirstOrDefault(x => x.UserId == uid);
-            return user;
+            var studentsInClass = _context.users
+                .Where(x => x.Role == "Student")
+                .Include(x => x.classes)
+                .Where(x => x.classes.ClassesId == id)
+                .ToList();
+            return View(studentsInClass);
         }
     }
 }

@@ -1,3 +1,4 @@
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -25,13 +26,27 @@ namespace WebApplication14.Controllers
              var id = HttpContext.Session.GetInt32("UserId");
             var password = HttpContext.Session.GetString("Password");
             var role = HttpContext.Session.GetString("Role");
-            if (email != null && id != null && password != null)
+            
+            var user = _context.users.FirstOrDefault(x =>x.UserId == id);
+            
+
+            if (email != null && id != null && password != null && user != null)
             {
+                var classe = _context.classes.FirstOrDefault(x => x.ClassesId == user.ClassesId);
+                
                 ViewBag.Email = email;
                 ViewBag.UserId = id;
                 ViewBag.Passowrd = password;
                 ViewBag.Role = role;
+                ViewBag.ClassId = user.ClassesId;
+                ViewBag.ClassName = classe.ClassName;
+                if(role == "Student")
+                {
+                    var student = _context.student.FirstOrDefault(x => x.UserId == user.UserId);
+                    ViewBag.StudentId = student.StudentId;
+                }
                 
+
                 return View("~/Views/Home/IndexTest.cshtml");
             }
             else

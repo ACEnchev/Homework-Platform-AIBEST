@@ -106,12 +106,23 @@ namespace WebApplication14.Controllers
 
         public async Task<IActionResult> SeeSubmissions([FromRoute] int id)
         {
-            var Estudent = await _context.student.FirstOrDefaultAsync(x => x.UserId == id);
-            var SId = Estudent.StudentId;
-            var subm = await _context.submission.Include(x => x.student)
-                .AsNoTracking().Where(x => x.student.StudentId == SId)
-                .ToListAsync();
-            return View(subm);
+            var role = HttpContext.Session.GetString("Role");
+
+            if(role == "Student")
+            {
+                var Estudent = await _context.student.FirstOrDefaultAsync(x => x.UserId == id);
+                var SId = Estudent.StudentId;
+                var subm = await _context.submission.Include(x => x.student)
+                    .AsNoTracking().Where(x => x.student.StudentId == SId)
+                    .ToListAsync();
+                return View(subm);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            
             
         }
     }
