@@ -1,4 +1,4 @@
-To start the project you need Visula Studio Code or Visual Studio
+To start the project you need Visual Studio Code or Visual Studio
 You need the following extensions:
 -.NET Extension Pack
 -.NET Install Tool
