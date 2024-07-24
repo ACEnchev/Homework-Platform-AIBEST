@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplication14.Data;
 using WebApplication14.Models;
@@ -97,5 +97,37 @@ namespace WebApplication14.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
+        [HttpGet]
+        [Route("grades/edit/{id}")]
+
+        public async Task<IActionResult> EditGrade([FromRoute] int id)
+        {
+            var role = HttpContext.Session.GetString("Role");
+            if (role == "Teacher" || role == "Admin")
+            {
+                return View();
+            }
+            return RedirectToAction("Index", "Home");
+        }
+        [HttpPost]
+        [Route("grades/edit/{id}")]
+
+        public async Task<IActionResult> EditGrade([FromRoute] int id, double grade)
+        {
+            var role = HttpContext.Session.GetString("Role");
+            if (role == "Teacher" || role == "Admin")
+            {
+                var ExistingGrade = await _context.grades.FirstOrDefaultAsync(x => x.GradesId == id);
+                if(ExistingGrade != null)
+                {
+                    ExistingGrade.Grade = grade;
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Index", "Home");
+                    
+                }
+            }
+            return RedirectToAction("Index", "Home");
+        }
+        
     }
 }
