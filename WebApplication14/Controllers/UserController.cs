@@ -22,8 +22,19 @@ namespace WebApplication14.Controllers
         public async Task<IActionResult> GetInfo([FromRoute] int id)
         {
             
-            User user = GetCurrentUser();
+            var email = HttpContext.Session.GetString("Email");
+            var uid = HttpContext.Session.GetInt32("UserId");
+            var password = HttpContext.Session.GetString("Password");
+            var role = HttpContext.Session.GetString("Role");
+            User user = new User()
+            {
+                Email = email,
+                UserId = id,
+                Password = password,
+                Role = role
+            };
 
+           
             return View(user);
         }
         [HttpGet]
@@ -43,6 +54,24 @@ namespace WebApplication14.Controllers
             }
         }
         [HttpGet]
+        [Route("users/delete/{id}")]
+
+        public async Task<IActionResult> DeleteUser([FromRoute] int id)
+        {
+            var user = await _context.users.FirstOrDefaultAsync(x => x.UserId == id);
+            if(user != null)
+            {
+                FindAndRemoveTeacher(user);
+                await _context.SaveChangesAsync();
+                _context.users.Remove(user);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("GetUsers", "User");
+            }
+            return RedirectToAction("Index", "Home");
+            
+        }
+
+        [HttpGet]
         [Route("users/getusers/{id}")]
         public IActionResult GetUsersFromClass([FromRoute] int id)
         {
@@ -53,6 +82,7 @@ namespace WebApplication14.Controllers
                 .ToList();
             return View(studentsInClass);
         }
+        
         [HttpGet]
         [Route("users/addrole/{id}")]
         public async Task<IActionResult> AddRole([FromRoute] int id)

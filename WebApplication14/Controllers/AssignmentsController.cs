@@ -5,6 +5,7 @@ using System.IO.MemoryMappedFiles;
 using Microsoft.CodeAnalysis;
 using System.IO;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace WebApplication14.Controllers
 {
@@ -27,7 +28,12 @@ namespace WebApplication14.Controllers
         [Route("assignments/upload")]
         public async Task<IActionResult> Upload()
         {
-            return View();
+            var role = HttpContext.Session.GetString("Role");
+            if(role == "Teacher" || role == "Admin")
+            {
+                return View();
+            }
+            return RedirectToAction("Index", "Home");
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -67,7 +73,7 @@ namespace WebApplication14.Controllers
         {
             var email = HttpContext.Session.GetString("Email");
             var password = HttpContext.Session.GetString("Password");
-            
+            var role = HttpContext.Session.GetString("Role");
             var user = await _context.users.FirstOrDefaultAsync(x => x.Email == email && x.Password == password);
             if(user != null)
             {
@@ -78,6 +84,11 @@ namespace WebApplication14.Controllers
              .AsNoTracking()
              .Where(x => x.classes.ClassesId == classId)
              .ToListAsync();
+                if(homework.Count == 0)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                ViewBag.Role = role; 
                 return View(homework);
             }
             else
@@ -98,7 +109,21 @@ namespace WebApplication14.Controllers
             return File(file.Description, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", file.Title);
 
         }
-        
+        [HttpGet]
+        [Route("assignments/delete/{id}")]
+        public async Task<IActionResult> Delete([FromRoute] int id)
+        {
+            var role = HttpContext.Session.GetString("Role");
+            var assign = await _context.assignments.FirstOrDefaultAsync(x => x.AssignmentsId == id);
+            if(assign != null && role == "Teacher")
+            {
+                _context.assignments.Remove(assign);
+                await _context.SaveChangesAsync();
+                
+                return RedirectToAction("ViewClasses", "Assignments");
+            }
+            return RedirectToAction("Index", "Home");
+        }
         
     }
 }

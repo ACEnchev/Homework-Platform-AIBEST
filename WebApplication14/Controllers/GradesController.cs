@@ -70,7 +70,7 @@ namespace WebApplication14.Controllers
 
             
 
-            if(role == "Teacher" && user != null)
+            if(role == "Teacher" && user != null || role == "Admin")
             {
                 var StudentGrades = await _context.grades
                .Include(x => x.submission)

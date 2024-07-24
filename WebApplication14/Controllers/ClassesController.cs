@@ -17,7 +17,12 @@ namespace WebApplication14.Controllers
         [Route("classes")]
         public IActionResult GetAll()
         {
-            return View(_context.classes.ToList());
+            var role = HttpContext.Session.GetString("Role");
+            if(role == "Admin")
+            {
+                return View(_context.classes.ToList());
+            }
+            return RedirectToAction("Index", "Home");
         }
         [HttpGet]
         [Route("classes/{id}")]
@@ -27,48 +32,7 @@ namespace WebApplication14.Controllers
             var classes = _context.classes.FirstOrDefault(x => x.ClassesId == id);
             return View(classes);
         }
-        [HttpGet]
-        [Route("classes/{id}/students")]
-        public async Task<IActionResult> GetStudents([FromRoute] int id)
-        {
-            var role = HttpContext.Session.GetString("Role");
-            if (role == "Teacher")
-            {
-                var students = await _context.users
-              .Where(x => x.Role == "Student")
-              .Include(s => s.classes)
-              .AsNoTracking()
-              .Where(x => x.classes.ClassesId == id)
-              .ToListAsync();
-                return View(students);
-            }
-            else
-            {
-                return RedirectToAction("Index", "Home");
-            }
-
-        }
-        [HttpGet]
-        [Route("classes/{id}/teachers")]
-        public async Task<IActionResult> GetTeachers([FromRoute] int id)
-        {
-            var role = HttpContext.Session.GetString("Role");
-            if (role == "Admin")
-            {
-                var students = await _context.users
-              .Where(x => x.Role == "Teacher")
-              .Include(s => s.classes)
-              .AsNoTracking()
-              .Where(x => x.classes.ClassesId == id)
-              .ToListAsync();
-                return View(students);
-            }
-            else
-            {
-                return RedirectToAction("Index", "Home");
-            }
-        }
-
+        
         [HttpGet]
         [Route("classes/{id}/assign-student")]
         public IActionResult AssignStudent()
@@ -93,7 +57,7 @@ namespace WebApplication14.Controllers
             if (role == "Teacher" || role == "Admin")
             {
                 var existinguser = await _context.users.FirstOrDefaultAsync(x => x.UserId == user.UserId);
-                if (existinguser != null)
+                if (existinguser != null && existinguser.Role == "Student")
                 {
                     existinguser.ClassesId = id;
                     await _context.SaveChangesAsync();
@@ -111,6 +75,38 @@ namespace WebApplication14.Controllers
             }
             
         }
+        [HttpGet]
+        [Route("classes/{id}/remove-student")]
+
+        public async Task<IActionResult> RemoveStudent([FromRoute] int id)
+        {
+            var role = HttpContext.Session.GetString("Role");
+            var user = await _context.users.FirstOrDefaultAsync(x => x.UserId == id);
+            if (user != null && user.Role == "Student" && role == "Admin" || role == "Teacher")
+            {
+                user.ClassesId = 1;
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index", "Home");
+            }
+            return RedirectToAction("Index", "Home");
+
+        }
+        [HttpGet]
+        [Route("classes/{id}/remove-teacher")]
+
+        public async Task<IActionResult> RemoveTeacher([FromRoute] int id)
+        {
+            var role = HttpContext.Session.GetString("Role");
+            var user = await _context.users.FirstOrDefaultAsync(x => x.UserId == id);
+            if(user != null && user.Role == "Teacher" && role == "Admin")
+            {
+                user.ClassesId = 1;
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index", "Home");
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
         [HttpGet]
         [Route("classes/{id}/assign-teacher")]
         public IActionResult AssignTeacher()
@@ -156,12 +152,34 @@ namespace WebApplication14.Controllers
         [Route("classes/{id}/getusers")]
         public async Task<IActionResult> GetStudentsFromClass([FromRoute] int id)
         {
-            var UsersInClass = await _context.student
+            var role = HttpContext.Session.GetString("Role");
+            if(role == "Teacher" || role == "Admin")
+            {
+                var UsersInClass = await _context.student
                 .Include(x => x.user)
                 .AsNoTracking()
                 .Where(x => x.user.ClassesId == id)
                 .ToListAsync();
-            return View(UsersInClass);
+                return View(UsersInClass);
+            }
+            return RedirectToAction("Index", "Home");
+        }
+        [HttpGet]
+        [Route("classes/{id}/getteachers")]
+
+        public async Task<IActionResult> GetTeachersFromClass([FromRoute] int id)
+        {
+            var role = HttpContext.Session.GetString("Role");
+            if(role == "Admin")
+            {
+                var teachersInClass = await _context.teachers
+                    .Include(x => x.user)
+                    .AsNoTracking()
+                    .Where(x => x.user.ClassesId == id)
+                    .ToListAsync();
+                return View(teachersInClass);
+            }
+            return RedirectToAction("Index", "Home");
         }
     }
 }

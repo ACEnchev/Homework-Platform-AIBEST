@@ -34,7 +34,10 @@ namespace WebApplication14.Controllers
                     .AsNoTracking()
                     .Where(x => x.assignments.ClassesId == ClassesID)
                     .ToList();
-                    
+                    if(students.Count == 0)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
                 return View(students);
                 
             }
@@ -115,6 +118,7 @@ namespace WebApplication14.Controllers
                 var subm = await _context.submission.Include(x => x.student)
                     .AsNoTracking().Where(x => x.student.StudentId == SId)
                     .ToListAsync();
+                
                 return View(subm);
             }
             else
