@@ -80,7 +80,31 @@
                         <button type = "submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg">See the students in your class</button>
                     </a>
                 </div>
+                <div>
+                    <h2 class="text-2xl font-bold mb-4">Manage Your Class</h2>
+                    <a asp-action="AssignStudent" asp-controller="Classes" asp-route-id="@ViewBag.ClassId">
+                        <button type = "submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg">Assign Student</button>
+                    </a>
+                </div>
                 
+            }
+            @if(ViewBag.Role == "Admin")
+            {
+                <div>
+                    <h2 class="text-2xl font-bold mb-4">Manage Classes</h2>
+                    <a asp-action="GetAll" asp-controller="Classes">
+                        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg">See Classes</button>
+                    </a>
+                    
+                </div>
+                
+                <div>
+                    <h2 class="text-2xl font-bold mb-4">Info about Users</h2>
+                    <a asp-action="GetUsers" asp-controller="User">
+                        <button type = "submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg">Get All Users</button>
+                    </a>
+
+                </div>
             }
            
         </div>
