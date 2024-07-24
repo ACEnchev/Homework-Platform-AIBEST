@@ -38,7 +38,7 @@ namespace WebApplication14.Controllers
                 var existingUser = _context.users.FirstOrDefault(x => x.UserId == user.UserId && x.Email == user.Email && x.Password == user.Password);
                 if(existingUser == null)
                 {
-                    
+                    user.Password = Encrypt(user.Password);
                     _context.users.Add(user);
                     
                     _context.SaveChanges();
@@ -66,7 +66,8 @@ namespace WebApplication14.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login([Bind("UserId,Email,Password")] User user           )
         {
-            var loggedUser = _context.users.FirstOrDefault(x => x.Password == user.Password && x.Email == user.Email);
+            
+            var loggedUser = _context.users.FirstOrDefault(x => x.Password == Encrypt(user.Password) && x.Email == user.Email);
             if(loggedUser != null)
             {
                 
@@ -104,6 +105,20 @@ namespace WebApplication14.Controllers
             var uid = HttpContext.Session.GetInt32("UserId");
             var user = _context.users.FirstOrDefault(x => x.UserId == uid);
             return user;
+        }
+        public static string Encrypt(string value)
+        {
+            try
+            {
+                byte[] encData_byte = new byte[value.Length];
+                encData_byte = System.Text.Encoding.UTF8.GetBytes(value);
+                string encodedData = Convert.ToBase64String(encData_byte);
+                return encodedData;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error in base64Encode" + ex.Message);
+            }
         }
     }
 }
