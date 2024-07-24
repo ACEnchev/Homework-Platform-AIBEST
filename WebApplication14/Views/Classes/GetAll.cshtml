@@ -7,4 +7,8 @@
 @foreach (var item in Model)
 {
     <h1>@item.ClassesId, @item.ClassName, @item.StudentCount</h1>
+    <a asp-action="AssignStudent" asp-controller="Classes" asp-route-id="@item.ClassesId">Assign Student</a>
+    <a asp-action="AssignTeacher" asp-controller="Classes" asp-route-id="@item.ClassesId">Assign Teacher</a>
+    <a asp-action="GetStudentsFromClass" asp-controller="Classes" asp-route-id="@item.ClassesId">See Students</a>
+    <a asp-action="GetTeachersFromClass" asp-controller="Classes" asp-route-id="@item.ClassesId">See Teachers</a>
 }

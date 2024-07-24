@@ -3,7 +3,7 @@
 *@
 @{
 }
-@model IEnumerable<WebApplication14.Models.Student>
+@model IEnumerable<WebApplication14.Models.Teacher>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,11 +18,11 @@
         <table class="min-w-full bg-white border border-gray-300 rounded-lg">
             <thead>
                 <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                    <th class="py-3 px-6 text-left">@Html.DisplayNameFor(u => u.StudentId)</th>
+                    <th class="py-3 px-6 text-left">@Html.DisplayNameFor(u => u.TeacherId)</th>
                     <th class="py-3 px-6 text-left">@Html.DisplayNameFor(u => u.user.FirstName)</th>
                     <th class="py-3 px-6 text-left">@Html.DisplayNameFor(u => u.user.LastName)</th>
                     <th class="py-3 px-6 text-left">@Html.DisplayNameFor(u => u.user.Email)</th>
-                    <th class="py-3 px-6 text-left">@Html.DisplayNameFor(u => u.PhoneNumber)</th>
+                    
                     <th class="py-3 px-6 text-center">Actions</th>
                 </tr>
             </thead>
@@ -31,7 +31,7 @@
                 {
                     <tr class="border-b border-gray-200 hover:bg-gray-100">
                         <td class="py-3 px-6 text-left whitespace-nowrap">
-                            <span class="font-medium">@item.StudentId</span>
+                            <span class="font-medium">@item.TeacherId</span>
                         </td>
                         <td class="py-3 px-6 text-left">
                             <span>@item.user.FirstName</span>
@@ -42,12 +42,10 @@
                         <td class="py-3 px-6 text-left">
                             <span>@item.user.Email</span>
                         </td>
-                        <td class="py-3 px-6 text-left">
-                            <span>@item.PhoneNumber</span>
-                        </td>
+                        
                         <td class="py-3 px-6 text-center">
-                            <a asp-action="CheckGrade" asp-controller="Grades" asp-route-id="@item.StudentId" class="text-blue-600 hover:underline">Check Grades</a>
-                            <a asp-action="RemoveStudent" asp-controller="Classes" asp-route-id="@item.UserId">Remove</a>
+                            
+                            <a asp-action="RemoveTeacher" asp-controller="Classes" asp-route-id="@item.UserId">Remove</a>
                         </td>
                     </tr>
                 }
