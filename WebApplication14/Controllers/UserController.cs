@@ -61,7 +61,19 @@ namespace WebApplication14.Controllers
             var user = await _context.users.FirstOrDefaultAsync(x => x.UserId == id);
             if(user != null)
             {
-                FindAndRemoveTeacher(user);
+                if(user.Role == "Teacher")
+                {
+                    FindAndRemoveTeacher(user);
+                }
+                else if(user.Role == "Student")
+                {
+                    FindAndRemoveStudent(user);
+                }
+                else if(user.Role == "Admin")
+                {
+                    FindAndRemoveAdmin(user);
+                }
+                
                 await _context.SaveChangesAsync();
                 _context.users.Remove(user);
                 await _context.SaveChangesAsync();
