@@ -6,41 +6,15 @@ INSERT INTO `finalattemtp`.`classes` (`ClassesId`, `ClassName`, `StudentCount`) 
 INSERT INTO `finalattemtp`.`classes` (`ClassesId`, `ClassName`, `StudentCount`) VALUES ('6', '8th Grade', '24');
 
 
-
 INSERT INTO `finalattemtp`.`users` (`UserId`, `Email`, `Password`, `Username`, `FirstName`, `LastName`, `Role`, `ClassesId`) VALUES ('1', 'admin@abv.bg', 'YWRtaW4=', 'Adminin', 'Name1', 'Name2', 'Admin', '1');
 INSERT INTO `finalattemtp`.`users` (`UserId`, `Email`, `Password`, `Username`, `FirstName`, `LastName`, `Role`, `ClassesId`) VALUES ('2', 'teacher@abv.bg', 'dGVhY2hlcg==', 'Teache', 'Name3', 'Name4', 'Teacher', '2');
 INSERT INTO `finalattemtp`.`users` (`UserId`, `Email`, `Password`, `Username`, `FirstName`, `LastName`, `Role`, `ClassesId`) VALUES ('3', 'teacher1@abv.bg', 'dGVhY2hlcjE=', 'Teachi', 'Name5', 'Name6', 'Teacher', '2');
-INSERT INTO `finalattemtp`.`users` (`UserId`, `Email`, `Password`, `Username`, `FirstName`, `LastName`, `Role`, `ClassesId`) VALUES ('4', 'teacher2@abv.bg', 'dGVhY2hlcjI=', 'Te', 'Name7', 'Name8', 'Teacher', '3');
-INSERT INTO `finalattemtp`.`users` (`UserId`, `Email`, `Password`, `Username`, `FirstName`, `LastName`, `Role`, `ClassesId`) VALUES ('5', 'teacher3@abv.bg', 'dGVhY2hlcjM=', 'He', 'Name9', 'Name10', 'Teacher', '3');
-INSERT INTO `finalattemtp`.`users` (`UserId`, `Email`, `Password`, `Username`, `FirstName`, `LastName`, `Role`, `ClassesId`) VALUES ('6', 'teacher4@abv.bg', 'dGVhY2hlcjQ=', 'Tea', 'Name11', 'Name12', 'Teacher', '4');
-INSERT INTO `finalattemtp`.`users` (`UserId`, `Email`, `Password`, `Username`, `FirstName`, `LastName`, `Role`, `ClassesId`) VALUES ('7', 'teacher5@abv.bg', 'dGVhY2hlcjU=', 'Fe', 'Name13', 'Name14', 'Teacher', '4');
-INSERT INTO `finalattemtp`.`users` (`UserId`, `Email`, `Password`, `Username`, `FirstName`, `LastName`, `Role`, `ClassesId`) VALUES ('8', 'teacher6@abv.bg', 'dGVhY2hlcjY=', 'Tee', 'Name15', 'Name16', 'Teacher', '5');
-INSERT INTO `finalattemtp`.`users` (`UserId`, `Email`, `Password`, `Username`, `FirstName`, `LastName`, `Role`, `ClassesId`) VALUES ('9', 'teacher7@abv.bg', 'dGVhY2hlcjc=', 'Teee', 'Name17', 'Name18', 'Teacher', '5');
-INSERT INTO `finalattemtp`.`users` (`UserId`, `Email`, `Password`, `Username`, `FirstName`, `LastName`, `Role`, `ClassesId`) VALUES ('10', 'teacher8@abv.bg', 'dGVhY2hlcjg=', 'T', 'Name19', 'Name20', 'Teacher', '6');
-INSERT INTO `finalattemtp`.`users` (`UserId`, `Email`, `Password`, `Username`, `FirstName`, `LastName`, `Role`, `ClassesId`) VALUES ('11', 'teacher9@abv.bg', 'dGVhY2hlcjk=', 'TR', 'Name21', 'Name22', 'Teacher', '6');
-INSERT INTO `finalattemtp`.`users` (`UserId`, `Email`, `Password`, `Username`, `FirstName`, `LastName`, `Role`, `ClassesId`) VALUES ('12', 'student1@abv.bg', 'c3R1ZGVudDE=', 'Stud', 'Name23', 'Name24', 'Student', '2');
-INSERT INTO `finalattemtp`.`users` (`UserId`, `Email`, `Password`, `Username`, `FirstName`, `LastName`, `Role`, `ClassesId`) VALUES ('13', 'student2@abv.bg', 'c3R1ZGVudDI=', 'Stude', 'Name25', 'Name26', 'Student', '3');
-INSERT INTO `finalattemtp`.`users` (`UserId`, `Email`, `Password`, `Username`, `FirstName`, `LastName`, `Role`, `ClassesId`) VALUES ('14', 'student3@abv.bg', 'c3R1ZGVudDM=', 'Studee', 'Name27', 'Name28', 'Student', '4');
-INSERT INTO `finalattemtp`.`users` (`UserId`, `Email`, `Password`, `Username`, `FirstName`, `LastName`, `Role`, `ClassesId`) VALUES ('15', 'student4@abv.bg', 'c3R1ZGVudDQ=', 'Studeee', 'Name29', 'Name30', 'Student', '5');
-INSERT INTO `finalattemtp`.`users` (`UserId`, `Email`, `Password`, `Username`, `FirstName`, `LastName`, `Role`, `ClassesId`) VALUES ('16', 'student5@abv.bg', 'c3R1ZGVudDU=', 'Studeeee', 'Name31', 'Name32', 'Student', '6');
+INSERT INTO `finalattemtp`.`users` (`UserId`, `Email`, `Password`, `Username`, `FirstName`, `LastName`, `Role`, `ClassesId`) VALUES ('4', 'student1@abv.bg', 'c3R1ZGVudDE=', 'Stud', 'Name23', 'Name24', 'Student', '2');
 
-INSERT INTO `finalattemtp`.`student` (`PhoneNumber`, `UserId`) VALUES ('0883738', '12');
-INSERT INTO `finalattemtp`.`student` (`PhoneNumber`, `UserId`) VALUES ('088978', '13');
-INSERT INTO `finalattemtp`.`student` (`PhoneNumber`, `UserId`) VALUES ('09080898', '14');
-INSERT INTO `finalattemtp`.`student` (`PhoneNumber`, `UserId`) VALUES ('08908080', '15');
-INSERT INTO `finalattemtp`.`student` (`PhoneNumber`, `UserId`) VALUES ('09080808', '16');
+INSERT INTO `finalattemtp`.`student` (`PhoneNumber`, `UserId`) VALUES ('0883738', '4');
 
 INSERT INTO `finalattemtp`.`administrators` (`AdministratorId`, `UserId`) VALUES ('1', '1');
 
 INSERT INTO `finalattemtp`.`teachers` (`TeacherId`, `UserId`) VALUES ('1', '2');
 INSERT INTO `finalattemtp`.`teachers` (`TeacherId`, `UserId`) VALUES ('2', '3');
-INSERT INTO `finalattemtp`.`teachers` (`TeacherId`, `UserId`) VALUES ('3', '4');
-INSERT INTO `finalattemtp`.`teachers` (`TeacherId`, `UserId`) VALUES ('4', '5');
-INSERT INTO `finalattemtp`.`teachers` (`TeacherId`, `UserId`) VALUES ('5', '6');
-INSERT INTO `finalattemtp`.`teachers` (`TeacherId`, `UserId`) VALUES ('6', '7');
-INSERT INTO `finalattemtp`.`teachers` (`TeacherId`, `UserId`) VALUES ('7', '8');
-INSERT INTO `finalattemtp`.`teachers` (`TeacherId`, `UserId`) VALUES ('8', '9');
-INSERT INTO `finalattemtp`.`teachers` (`TeacherId`, `UserId`) VALUES ('9', '10');
-INSERT INTO `finalattemtp`.`teachers` (`TeacherId`, `UserId`) VALUES ('10', '11');
-INSERT INTO `finalattemtp`.`teachers` (`TeacherId`, `UserId`) VALUES ('11', '12');
-INSERT INTO `finalattemtp`.`teachers` (`TeacherId`) VALUES ('12');
+
